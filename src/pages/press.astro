@@ -6,6 +6,8 @@ import battle from "../assets/screens/battle.png";
 import map from "../assets/screens/map.png";
 import starters from "../assets/screens/starters.png";
 import shop from "../assets/screens/shop.png";
+import logo from "../assets/logo.png";
+import keyArt from "../assets/hero.png";
 
 const facts = [
   ["Developer", STUDIO.legalName],
@@ -58,7 +60,7 @@ const shots = [battle, map, starters, shop];
             <li>Turn planning with a visible turn order, formations and a type wheel</li>
             <li>Three floors of branching maps with events, shops, healing springs, elites and ten bosses</li>
             <li>Relics, card upgrades, Ascension levels and achievements to chase</li>
-            <li>A hand-drawn, ink-and-wash art style</li>
+            <li>A storybook, ink-and-wash art style</li>
           </ul>
         </div>
       </div>
@@ -68,9 +70,20 @@ const shots = [battle, map, starters, shop];
   <section class="section tinted">
     <div class="wrap">
       <h2>Logo and key art</h2>
-      <div class="button-row">
-        <a class="button" href="/press/harness-the-elements-logo.png" download>Logo (PNG, transparent)</a>
-        <a class="button" href="/press/harness-the-elements-key-art.png" download>Key art (PNG, 1920×1080)</a>
+      <p>Click an image to download the full-size PNG.</p>
+      <div class="art-grid">
+        <figure>
+          <a href="/press/harness-the-elements-logo.png" download class="logo-tile">
+            <Image src={logo} alt={`${GAME.title} logo`} widths={[400, 800]} sizes="(max-width: 700px) 100vw, 40vw" />
+          </a>
+          <figcaption>Logo · transparent PNG, 1495×972</figcaption>
+        </figure>
+        <figure>
+          <a href="/press/harness-the-elements-key-art.png" download>
+            <Image src={keyArt} alt={`${GAME.title} key art: a valley of mountains, forests, rivers and a volcano`} widths={[640, 1280]} sizes="(max-width: 700px) 100vw, 55vw" />
+          </a>
+          <figcaption>Key art · PNG, 1920×1080</figcaption>
+        </figure>
       </div>
 
       <h2 style="margin-top: 2.5rem">Screenshots</h2>
@@ -102,6 +115,22 @@ const shots = [battle, map, starters, shop];
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
     gap: 1rem;
+  }
+  .art-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 1rem;
+    align-items: start;
+  }
+  @media (max-width: 700px) {
+    .art-grid { grid-template-columns: 1fr; }
+  }
+  .art-grid figure { margin: 0; }
+  .art-grid figcaption { color: var(--ink-dim); font-size: 1rem; margin-top: 0.4rem; }
+  .art-grid img { border-radius: var(--radius); border: 2px solid var(--vine); }
+  .logo-tile img {
+    padding: 1.25rem;
+    background: repeating-conic-gradient(#e9dfc8 0% 25%, #f3ead7 0% 50%) 0 0 / 24px 24px;
   }
   .shot-grid img { border-radius: var(--radius); border: 2px solid var(--vine); }
 </style>

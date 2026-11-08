@@ -2,8 +2,8 @@
 export const STUDIO = {
   name: "CoKo Entertainment",
   legalName: "CoKo Entertainment LLC",
-  tagline: "Small studio, hand-drawn worlds.",
-  email: "contact@cokoentertainment.com", // change to the Workspace address you want public
+  tagline: "A one-person studio using AI tools to bring game ideas to life.",
+  email: "colekotecki@cokoentertainment.com",
 };
 
 export const GAME = {
