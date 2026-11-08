@@ -1,0 +1,168 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import SteamButton from "../../components/SteamButton.astro";
+import NewsList from "../../components/NewsList.astro";
+import { GAME } from "../../site";
+import { getNews } from "../../lib/news";
+import logo from "../../assets/logo.png";
+import battle from "../../assets/screens/battle.png";
+import map from "../../assets/screens/map.png";
+import starters from "../../assets/screens/starters.png";
+import shop from "../../assets/screens/shop.png";
+import puffy from "../../assets/creatures/puffy.png";
+import pebblet from "../../assets/creatures/pebblet.png";
+import voltail from "../../assets/creatures/voltail.png";
+import venotoad from "../../assets/creatures/venotoad.png";
+import dewdrop from "../../assets/creatures/dewdrop.png";
+
+const starterList = [
+  { name: "Pebblet", type: "Earth", color: "var(--earth)", img: pebblet },
+  { name: "Puffy", type: "Air", color: "var(--air)", img: puffy },
+  { name: "Voltail", type: "Energy", color: "var(--energy)", img: voltail },
+  { name: "Venotoad", type: "Grass", color: "var(--grass)", img: venotoad },
+  { name: "Dewdrop", type: "Water", color: "var(--water)", img: dewdrop },
+];
+
+const features = [
+  { title: "Raise a team", text: "Recruit up to 30 creatures across five elemental types. Each brings its own cards, and every battle makes them stronger." },
+  { title: "Build the deck", text: "Your deck is made from your creatures' cards. Mix types for clever synergies, or go all in on one element." },
+  { title: "Read the field", text: "Plan every turn around who acts first, where everyone stands and how the type wheel turns a hit into a knockout." },
+  { title: "Climb three floors", text: "Fight through battles, events, shops and healing springs, then face the boss waiting at the end of each floor." },
+];
+
+const shots = [
+  { img: battle, alt: "A battle: Pebblet and Prismwing face a Shardling on a sunny meadow, with a card in hand." },
+  { img: map, alt: "The run map, with Water, Energy and Grass biomes and paths leading to the floor's boss." },
+  { img: starters, alt: "The starter select screen." },
+  { img: shop, alt: "The shop, selling cards, relics and services." },
+];
+
+const posts = (await getNews()).filter((p) => p.data.game === GAME.slug).slice(0, 3);
+---
+
+<Base title={GAME.title} description={GAME.pitch} image={battle.src}>
+  <section class="section game-hero">
+    <div class="wrap game-intro">
+      <Image src={logo} alt={GAME.title} class="game-logo" widths={[360, 720]} sizes="(max-width: 700px) 80vw, 360px" loading="eager" />
+      <div>
+        <p class="eyebrow">{GAME.status}</p>
+        <p class="lede">{GAME.pitch}</p>
+        <div class="button-row">
+          <SteamButton />
+          <a class="button" href="/press/">Press kit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted">
+    <div class="wrap">
+      <h2>How it plays</h2>
+      <div class="features">
+        {features.map((f) => (
+          <div class="panel">
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Pick your starter</h2>
+      <p class="lede">Every run begins with one of five starters, one for each element.</p>
+      <ul class="starters">
+        {starterList.map((s) => (
+          <li class="panel starter" style={`--type: ${s.color}`}>
+            <Image src={s.img} alt="" widths={[200, 400]} sizes="200px" />
+            <h3>{s.name}</h3>
+            <span class="type-chip">{s.type}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section tinted">
+    <div class="wrap">
+      <h2>Screenshots</h2>
+      <div class="shots">
+        {shots.map((s) => (
+          <a href={s.img.src} class="shot">
+            <Image src={s.img} alt={s.alt} widths={[640, 1280]} sizes="(max-width: 800px) 100vw, 50vw" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <h2>News</h2>
+        <NewsList posts={posts} />
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .game-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .game-logo { width: 100%; }
+  @media (max-width: 700px) {
+    .game-intro { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    .game-intro .button-row { justify-content: center; }
+    .game-logo { width: min(360px, 80vw); }
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+  }
+  .features p { margin: 0; }
+
+  .starters {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: 1rem;
+  }
+  .starter {
+    text-align: center;
+    border-color: var(--type);
+    padding: 1rem;
+  }
+  .starter img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+  .starter h3 { margin: 0.5rem 0 0.3rem; }
+  .type-chip {
+    display: inline-block;
+    background: var(--type);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 0.05rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+    gap: 1rem;
+  }
+  .shot img {
+    border-radius: var(--radius);
+    border: 2px solid var(--vine);
+    transition: transform 0.15s ease;
+  }
+  .shot:hover img { transform: scale(1.01); }
+</style>

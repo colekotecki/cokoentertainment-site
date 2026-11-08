@@ -1,0 +1,11 @@
+---
+import { GAME, steamUrl } from "../site";
+---
+
+{GAME.steamAppId ? (
+  <a class="button primary" href={steamUrl(GAME.steamAppId)} rel="noopener">
+    Wishlist on Steam
+  </a>
+) : (
+  <span class="button primary" aria-disabled="true">Steam page coming soon</span>
+)}

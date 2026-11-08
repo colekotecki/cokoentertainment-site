@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import NewsList from "../../components/NewsList.astro";
+import { getNews } from "../../lib/news";
+
+const posts = await getNews();
+---
+
+<Base title="News" description="Devlogs, patch notes and announcements from CoKo Entertainment.">
+  <section class="section">
+    <div class="wrap">
+      <h1>News</h1>
+      <p class="lede">Devlogs, patch notes and announcements. Follow along with <a href="/rss.xml">RSS</a>.</p>
+      <NewsList posts={posts} />
+    </div>
+  </section>
+</Base>

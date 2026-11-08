@@ -1,0 +1,107 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import { GAME, STUDIO, steamUrl } from "../site";
+import battle from "../assets/screens/battle.png";
+import map from "../assets/screens/map.png";
+import starters from "../assets/screens/starters.png";
+import shop from "../assets/screens/shop.png";
+
+const facts = [
+  ["Developer", STUDIO.legalName],
+  ["Platform", "Windows (Steam)"],
+  ["Genre", "Roguelike deck-builder, creature collecting"],
+  ["Release", GAME.status],
+  ["Price", "TBA"],
+  ["Contact", STUDIO.email],
+];
+const shots = [battle, map, starters, shop];
+---
+
+<Base title="Press kit" description={`Press kit for ${GAME.title}: facts, description, logo, key art and screenshots.`}>
+  <section class="section">
+    <div class="wrap">
+      <h1>Press kit</h1>
+      <p class="lede">Everything you need to write about {GAME.title}. All assets may be used in coverage of the game.</p>
+
+      <div class="press-grid">
+        <div class="panel">
+          <h2>Fact sheet</h2>
+          <dl class="facts">
+            {facts.map(([k, v]) => (
+              <>
+                <dt>{k}</dt>
+                <dd>{k === "Contact" ? <a href={`mailto:${v}`}>{v}</a> : v}</dd>
+              </>
+            ))}
+            {GAME.steamAppId && (
+              <>
+                <dt>Steam</dt>
+                <dd><a href={steamUrl(GAME.steamAppId)}>Store page</a></dd>
+              </>
+            )}
+          </dl>
+        </div>
+
+        <div class="prose">
+          <h2>Description</h2>
+          <p>{GAME.pitch}</p>
+          <p>
+            Each run starts with one of five starter creatures: Earth, Air, Energy, Grass or Water.
+            Along the way you recruit more, place them in battle or resource slots, and shape a deck built from
+            their cards. Battles are planned a turn at a time: who acts first, where each creature stands and
+            which element beats which all matter.
+          </p>
+          <h2>Features</h2>
+          <ul>
+            <li>30 creatures across five elemental types, each with its own cards and stats that grow every battle</li>
+            <li>Turn planning with a visible turn order, formations and a type wheel</li>
+            <li>Three floors of branching maps with events, shops, healing springs, elites and ten bosses</li>
+            <li>Relics, card upgrades, Ascension levels and achievements to chase</li>
+            <li>A hand-drawn, ink-and-wash art style</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted">
+    <div class="wrap">
+      <h2>Logo and key art</h2>
+      <div class="button-row">
+        <a class="button" href="/press/harness-the-elements-logo.png" download>Logo (PNG, transparent)</a>
+        <a class="button" href="/press/harness-the-elements-key-art.png" download>Key art (PNG, 1920×1080)</a>
+      </div>
+
+      <h2 style="margin-top: 2.5rem">Screenshots</h2>
+      <p>Click a screenshot for the full 1920×1080 image.</p>
+      <div class="shot-grid">
+        {shots.map((s) => (
+          <a href={s.src}><Image src={s} alt="" widths={[480, 960]} sizes="(max-width: 700px) 100vw, 33vw" /></a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .press-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+    margin-top: 2rem;
+  }
+  @media (max-width: 800px) {
+    .press-grid { grid-template-columns: 1fr; }
+  }
+  .facts { margin: 0; }
+  .facts dt { font-weight: 700; margin-top: 0.75rem; }
+  .facts dd { margin: 0; overflow-wrap: anywhere; }
+  .shot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1rem;
+  }
+  .shot-grid img { border-radius: var(--radius); border: 2px solid var(--vine); }
+</style>
