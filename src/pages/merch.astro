@@ -2,19 +2,17 @@
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { STUDIO, GAME } from "../site";
-import logo from "../assets/brand/logo.svg";
+import studioLogo from "../assets/brand/logo.svg";
+import gameLogo from "../assets/logo.png";
 import hero from "../assets/hero.png";
 import pebblet from "../assets/creatures/pebblet.png";
-import puffy from "../assets/creatures/puffy.png";
-import voltail from "../assets/creatures/voltail.png";
 
-// Placeholder products. Replace `url` with a store link (Shopify, Etsy, Fourthwall...) when one exists.
+// Merch ideas. Replace `url` with a store link (Shopify, Etsy, Fourthwall...) when one exists.
 const items = [
-  { name: "Starter plush: Pebblet", note: "Plush", img: pebblet, url: "" },
-  { name: "Starter plush: Puffy", note: "Plush", img: puffy, url: "" },
-  { name: "Voltail sticker sheet", note: "Stickers", img: voltail, url: "" },
-  { name: `${GAME.title} art print`, note: "Print", img: hero, url: "" },
-  { name: "CoKo logo T-shirt", note: "Apparel", img: logo, url: "", contain: true },
+  { name: "Starter plushies", note: GAME.title, img: pebblet, url: "" },
+  { name: "Art prints", note: GAME.title, img: hero, url: "" },
+  { name: "Studio merch", note: STUDIO.name, img: studioLogo, url: "", contain: true },
+  { name: "Game merch", note: GAME.title, img: gameLogo, url: "", contain: true },
 ];
 ---
 
@@ -24,8 +22,9 @@ const items = [
       <p class="eyebrow">Coming soon</p>
       <h1>Merch</h1>
       <p class="lede">
-        The shop isn't open yet. These are some of the things we're thinking about. To hear when they're
-        ready, or to tell us what you'd buy, email <a href={`mailto:${STUDIO.email}?subject=Merch`}>{STUDIO.email}</a>.
+        The shop isn't open yet, but here are a few merch ideas we've been considering. If any of them
+        interest you, email us at <a href={`mailto:${STUDIO.email}?subject=Merch`}>{STUDIO.email}</a> and
+        tell us what you'd buy. If an item comes to life, we'll email you back. Thank you in advance!
       </p>
 
       <ul class="merch">
@@ -40,7 +39,7 @@ const items = [
             {item.url ? (
               <a class="button primary" href={item.url} rel="noopener">Buy</a>
             ) : (
-              <span class="price">Price TBA</span>
+              <a class="price" href={`mailto:${STUDIO.email}?subject=${encodeURIComponent(`Merch interest: ${item.name}`)}`}>I'd buy this →</a>
             )}
           </li>
         ))}

@@ -30,7 +30,7 @@ Commit and push to `main`. GitHub builds and publishes the site in about a minut
 
 **Social links:** paste each profile URL into `SOCIALS` in `src/site.ts`. Empty ones show in the footer as "soon"; to drop a network, delete its line.
 
-**Merch:** `src/pages/merch.astro` lists placeholder products. Give one a `url` (a Shopify, Etsy or Fourthwall link...) and its card gets a Buy button.
+**Merch:** `src/pages/merch.astro` lists merch ideas (starter plushies, art prints, studio and game merch). Give one a `url` (a Shopify, Etsy or Fourthwall link...) and its card gets a Buy button.
 
 **Studio logo:** `src/assets/brand/logo.svg`, a vector version of the hand-drawn CoKo monogram. It's in the header on every page, and `public/favicon.svg` is a copy for the browser tab.
 
