@@ -5,9 +5,9 @@ import { STUDIO } from "../site";
 import SocialLinks from "../components/SocialLinks.astro";
 import "../styles/global.css";
 
-// The studio logo: drop a file named logo.png (or .webp/.jpg/.svg) into src/assets/brand/
+// The studio logo: drop a file named logo.png (or .webp/.jpg) into src/assets/brand/
 // and it replaces the star mark in the header on every page.
-const brandFiles = import.meta.glob<{ default: ImageMetadata }>("../assets/brand/logo.{png,webp,jpg,jpeg,svg}", { eager: true });
+const brandFiles = import.meta.glob<{ default: ImageMetadata }>("../assets/brand/logo.{png,webp,jpg,jpeg}", { eager: true });
 const brandLogo = Object.values(brandFiles)[0]?.default;
 
 interface Props {
@@ -36,7 +36,7 @@ const nav = [
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="alternate" type="application/rss+xml" title={`${STUDIO.name} News`} href="/rss.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:title" content={fullTitle} />

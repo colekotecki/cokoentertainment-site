@@ -32,7 +32,7 @@ Commit and push to `main`. GitHub builds and publishes the site in about a minut
 
 **Merch:** `src/pages/merch.astro` lists merch ideas (starter plushies, art prints, studio and game merch). Give one a `url` (a Shopify, Etsy or Fourthwall link...) and its card gets a Buy button.
 
-**Studio logo:** `src/assets/brand/logo.svg`, a vector version of the hand-drawn CoKo monogram. It's in the header on every page, and `public/favicon.svg` is a copy for the browser tab.
+**Studio logo:** `src/assets/brand/logo.png` (the CoKo monogram in the site's ink color, transparent). It's in the header on every page; `public/favicon.png` is the browser-tab icon and `public/press/coko-entertainment-logo.png` the black version in the press kit.
 
 **Shared facts** (studio email, game pitch, Steam app ID) are in `src/site.ts`. Once the Steam store page exists, put its app ID in `steamAppId`, and every "Steam page coming soon" button becomes "Wishlist on Steam".
 
