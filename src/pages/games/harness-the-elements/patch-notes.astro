@@ -1,0 +1,26 @@
+---
+import Base from "../../../layouts/Base.astro";
+import NewsList from "../../../components/NewsList.astro";
+import { GAME } from "../../../site";
+import { getNews } from "../../../lib/news";
+
+const notes = (await getNews()).filter((p) => p.data.game === GAME.slug && p.data.kind === "patch-notes");
+---
+
+<Base title={`${GAME.title} patch notes`} description={`Every update to ${GAME.title}: what's new, what changed and what was fixed.`}>
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow"><a href={`/games/${GAME.slug}/`}>{GAME.title}</a></p>
+      <h1>Patch notes</h1>
+      <p class="lede">Every update to the game: what's new, what changed and what was fixed.</p>
+      {notes.length > 0 ? (
+        <NewsList posts={notes} />
+      ) : (
+        <p class="placeholder-note">
+          No patches yet. Patch notes will appear here once the game is out. To follow along until then,
+          read the <a href="/news/">news</a>.
+        </p>
+      )}
+    </div>
+  </section>
+</Base>

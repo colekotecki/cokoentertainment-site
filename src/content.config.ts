@@ -8,6 +8,9 @@ const news = defineCollection({
     date: z.coerce.date(),
     summary: z.string(),
     game: z.string().optional(),
+    // "patch-notes" posts also appear on the game's Patch notes page.
+    kind: z.enum(["news", "patch-notes", "devlog"]).default("news"),
+    version: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });

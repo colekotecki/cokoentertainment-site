@@ -47,14 +47,15 @@ const latest = (await getNews()).slice(0, 3);
       <h2>About {STUDIO.name}</h2>
       <div class="prose">
         <p class="lede">
-          We use AI tools to bring our love of game design to life. AI lets us build the worlds and ideas
-          we've imagined, and we test our games meticulously so they play well and are worth your time.
-          We won't release anything we wouldn't play ourselves.
+          {STUDIO.name} uses AI tools to turn a passion for game design into finished games. AI lets us
+          build worlds and ideas that would otherwise stay on the drawing board. Every game is thoroughly
+          playtested so it plays well and respects your time, and we will never release a game we wouldn't
+          happily play ourselves.
         </p>
         <p>
-          {STUDIO.name} is one developer. I have four children and a day job, and without AI there would
-          be no way for me to bring any of these ideas to life. If something feels too sloppy to you, tell me.
-          I'm happy to fix it so the game can be the best it can be.
+          {STUDIO.name} is a one-person studio, run alongside a full-time job and a family of four children.
+          Without AI, these games could not exist. Player feedback is always welcome: if anything feels rough
+          or unpolished, please get in touch, and I will work to polish that aspect.
         </p>
         <p>
           Questions, feedback, press or just saying hi: <a href={`mailto:${STUDIO.email}`}>{STUDIO.email}</a>

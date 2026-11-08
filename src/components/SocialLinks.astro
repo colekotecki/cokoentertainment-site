@@ -1,0 +1,37 @@
+---
+import { SOCIALS } from "../site";
+---
+
+<ul class="socials" aria-label="Social media">
+  {SOCIALS.map((s) => (
+    <li>
+      {s.url ? (
+        <a href={s.url} rel="me noopener">{s.name}</a>
+      ) : (
+        <span class="soon" title={`${s.name} coming soon`}>{s.name} <small>soon</small></span>
+      )}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .socials {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .socials a,
+  .socials .soon {
+    display: inline-block;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    padding: 0.1rem 0.75rem;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+  .socials .soon { opacity: 0.6; }
+  .socials small { font-size: 0.75rem; font-style: italic; }
+</style>

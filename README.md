@@ -26,6 +26,14 @@ Write the post here. Images can go in public/ and be linked as /my-image.png.
 
 Commit and push to `main`. GitHub builds and publishes the site in about a minute.
 
+**Patch notes:** copy `src/content/news/patch-notes-template.md`, fill it in and set `draft: false`. A post with `kind: patch-notes` shows in the news, on the game page and on `/games/harness-the-elements/patch-notes/`. (`kind: devlog` tags a post as a devlog.)
+
+**Social links:** paste each profile URL into `SOCIALS` in `src/site.ts`. Empty ones show in the footer as "soon"; to drop a network, delete its line.
+
+**Merch:** `src/pages/merch.astro` lists placeholder products. Give one a `url` (a Shopify, Etsy or Fourthwall link...) and its card gets a Buy button.
+
+**Studio logo:** `src/assets/brand/logo.svg`, a vector version of the hand-drawn CoKo monogram. It's in the header on every page, and `public/favicon.svg` is a copy for the browser tab.
+
 **Shared facts** (studio email, game pitch, Steam app ID) are in `src/site.ts`. Once the Steam store page exists, put its app ID in `steamAppId`, and every "Steam page coming soon" button becomes "Wishlist on Steam".
 
 ## Layout
@@ -33,8 +41,10 @@ Commit and push to `main`. GitHub builds and publishes the site in about a minut
 | Path | What it is |
 | --- | --- |
 | `src/pages/index.astro` | Home page |
-| `src/pages/games/harness-the-elements.astro` | Game page |
+| `src/pages/games/harness-the-elements/index.astro` | Game page |
 | `src/pages/news/` | News list and post pages |
+| `src/pages/games/harness-the-elements/patch-notes.astro` | Patch notes page |
+| `src/pages/merch.astro` | Merch page (placeholders) |
 | `src/pages/press.astro` | Press kit (downloads are in `public/press/`) |
 | `src/pages/rss.xml.ts` | RSS feed |
 | `src/layouts/Base.astro` | Header, footer and meta tags shared by every page |

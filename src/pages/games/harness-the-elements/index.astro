@@ -1,20 +1,20 @@
 ---
 import { Image } from "astro:assets";
-import Base from "../../layouts/Base.astro";
-import SteamButton from "../../components/SteamButton.astro";
-import NewsList from "../../components/NewsList.astro";
-import { GAME } from "../../site";
-import { getNews } from "../../lib/news";
-import logo from "../../assets/logo.png";
-import battle from "../../assets/screens/battle.png";
-import map from "../../assets/screens/map.png";
-import starters from "../../assets/screens/starters.png";
-import shop from "../../assets/screens/shop.png";
-import puffy from "../../assets/creatures/puffy.png";
-import pebblet from "../../assets/creatures/pebblet.png";
-import voltail from "../../assets/creatures/voltail.png";
-import venotoad from "../../assets/creatures/venotoad.png";
-import dewdrop from "../../assets/creatures/dewdrop.png";
+import Base from "../../../layouts/Base.astro";
+import SteamButton from "../../../components/SteamButton.astro";
+import NewsList from "../../../components/NewsList.astro";
+import { GAME } from "../../../site";
+import { getNews } from "../../../lib/news";
+import logo from "../../../assets/logo.png";
+import battle from "../../../assets/screens/battle.png";
+import map from "../../../assets/screens/map.png";
+import starters from "../../../assets/screens/starters.png";
+import shop from "../../../assets/screens/shop.png";
+import puffy from "../../../assets/creatures/puffy.png";
+import pebblet from "../../../assets/creatures/pebblet.png";
+import voltail from "../../../assets/creatures/voltail.png";
+import venotoad from "../../../assets/creatures/venotoad.png";
+import dewdrop from "../../../assets/creatures/dewdrop.png";
 
 const starterList = [
   { name: "Pebblet", type: "Earth", color: "var(--earth)", img: pebblet },
@@ -38,7 +38,9 @@ const shots = [
   { img: shop, alt: "The shop, selling cards, relics and services." },
 ];
 
-const posts = (await getNews()).filter((p) => p.data.game === GAME.slug).slice(0, 3);
+const gamePosts = (await getNews()).filter((p) => p.data.game === GAME.slug);
+const posts = gamePosts.filter((p) => p.data.kind !== "patch-notes").slice(0, 3);
+const latestPatch = gamePosts.find((p) => p.data.kind === "patch-notes");
 ---
 
 <Base title={GAME.title} description={GAME.pitch} image={battle.src}>
@@ -99,8 +101,20 @@ const posts = (await getNews()).filter((p) => p.data.game === GAME.slug).slice(0
     </div>
   </section>
 
+  <section class="section">
+    <div class="wrap">
+      <h2>Patch notes</h2>
+      {latestPatch ? (
+        <NewsList posts={[latestPatch]} />
+      ) : (
+        <p class="placeholder-note">No patches yet. Patch notes will be posted here with every update after release.</p>
+      )}
+      <p><a href={`/games/${GAME.slug}/patch-notes/`}>All patch notes →</a></p>
+    </div>
+  </section>
+
   {posts.length > 0 && (
-    <section class="section">
+    <section class="section tinted">
       <div class="wrap">
         <h2>News</h2>
         <NewsList posts={posts} />

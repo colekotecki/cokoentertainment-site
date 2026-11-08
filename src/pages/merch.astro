@@ -1,0 +1,85 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import { STUDIO, GAME } from "../site";
+import logo from "../assets/brand/logo.svg";
+import hero from "../assets/hero.png";
+import pebblet from "../assets/creatures/pebblet.png";
+import puffy from "../assets/creatures/puffy.png";
+import voltail from "../assets/creatures/voltail.png";
+
+// Placeholder products. Replace `url` with a store link (Shopify, Etsy, Fourthwall...) when one exists.
+const items = [
+  { name: "Starter plush: Pebblet", note: "Plush", img: pebblet, url: "" },
+  { name: "Starter plush: Puffy", note: "Plush", img: puffy, url: "" },
+  { name: "Voltail sticker sheet", note: "Stickers", img: voltail, url: "" },
+  { name: `${GAME.title} art print`, note: "Print", img: hero, url: "" },
+  { name: "CoKo logo T-shirt", note: "Apparel", img: logo, url: "", contain: true },
+];
+---
+
+<Base title="Merch" description={`${STUDIO.name} merchandise: coming soon.`}>
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Coming soon</p>
+      <h1>Merch</h1>
+      <p class="lede">
+        The shop isn't open yet. These are some of the things we're thinking about. To hear when they're
+        ready, or to tell us what you'd buy, email <a href={`mailto:${STUDIO.email}?subject=Merch`}>{STUDIO.email}</a>.
+      </p>
+
+      <ul class="merch">
+        {items.map((item) => (
+          <li class="panel">
+            <div class:list={["merch-img", { contain: item.contain }]}>
+              <Image src={item.img} alt="" widths={[300, 600]} sizes="(max-width: 600px) 100vw, 300px" />
+              <span class="badge">{item.url ? "Available" : "Coming soon"}</span>
+            </div>
+            <p class="note">{item.note}</p>
+            <h3>{item.name}</h3>
+            {item.url ? (
+              <a class="button primary" href={item.url} rel="noopener">Buy</a>
+            ) : (
+              <span class="price">Price TBA</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .merch {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
+  }
+  .merch li { display: flex; flex-direction: column; }
+  .merch-img {
+    position: relative;
+    aspect-ratio: 1;
+    background: var(--parchment-dark);
+    border-radius: calc(var(--radius) - 4px);
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+  .merch-img img { width: 100%; height: 100%; object-fit: cover; }
+  .merch-img.contain img { object-fit: contain; padding: 1.5rem; }
+  .badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background: var(--gold);
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    padding: 0 0.6rem;
+    font-size: 0.85rem;
+  }
+  .note { margin: 0; color: var(--ink-dim); font-size: 0.95rem; }
+  .merch h3 { margin: 0.1rem 0 0.5rem; flex: 1; }
+  .price { color: var(--ink-dim); font-style: italic; }
+</style>

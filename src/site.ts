@@ -16,4 +16,14 @@ export const GAME = {
   steamAppId: "",
 };
 
+// Social links. Paste a profile URL into `url` to make it live; empty ones show as "soon".
+export const SOCIALS = [
+  { name: "Discord", url: "" },
+  { name: "YouTube", url: "" },
+  { name: "Bluesky", url: "" },
+  { name: "X", url: "" },
+  { name: "TikTok", url: "" },
+  { name: "Instagram", url: "" },
+];
+
 export const steamUrl = (id: string) => `https://store.steampowered.com/app/${id}/`;
